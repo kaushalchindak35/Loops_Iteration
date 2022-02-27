@@ -20,7 +20,8 @@ public class CarRecords {
 
 
         List<Carp> carRecords=new ArrayList<>();
-        carRecords = getCarRecords();
+//        carRecords =
+                getCarRecords();
         System.out.println(carRecords.size());
 
     }
@@ -41,12 +42,36 @@ public class CarRecords {
         return generatedString;
     }
 
-    private static List<Carp> getCarRecords() {
+    private static void getCarRecords() {
 
         Carp carp = new Carp();
         Random random = new Random();
 
-        List<Carp> carRecords = new ArrayList<>();
+        HashSet<String> carName=new HashSet<>();
+        HashMap<String,HashMap<String,String>> cNameMakeType = new HashMap<>();
+        HashMap<String,HashSet<String>> cNameTrim=new HashMap<>();
+        for(int i=0;i<100;i++){
+            carName.add(getRandomString());
+        }
+        System.out.println("all car names");
+        carName.stream().forEach(s -> System.out.println(s));
+        carName.stream().forEach(cname->cNameMakeType.put(cname,new HashMap<>()));
+        System.out.println("-----------------");
+        cNameMakeType.entrySet().stream().forEach(cnmt-> cnmt.getValue().put(String.valueOf(carMake.values()[random.nextInt(carMake.values().length)]),String.valueOf(carType.values()[random.nextInt(carType.values().length)])));
+
+        System.out.println("hashmap");
+        System.out.println(cNameMakeType);
+
+        carName.stream().forEach(cn->cNameTrim.put(cn,new HashSet<>()));
+
+        cNameTrim.entrySet().stream().forEach(cnt->cnt.getValue().add(String.valueOf(carTrim.values()[random.nextInt(carTrim.values().length)])));
+
+        System.out.println("--Car Name and Trim--");
+        System.out.println(cNameTrim);
+
+
+
+//        List<Carp> carRecords = new ArrayList<>();
 //        for (long i = 0; i < 100000; i++) {
 
 //        while(carRecords.size()<100){
@@ -131,7 +156,7 @@ public class CarRecords {
 
             System.out.println(c);
         }*/
-            return carRecords;
+//            return carRecords;
 
     }
 
@@ -150,7 +175,7 @@ public class CarRecords {
             Random random = null;
             String numbers = "0123456789";
             // create a super set of all characters
-            String allCharacters = alphabetsInLowerCase + alphabetsInUpperCase + numbers;
+            String allCharacters = alphabetsInLowerCase ;
             // initialize a string to hold result
             StringBuffer randomString = new StringBuffer();
             // loop for 10 times
